@@ -24,13 +24,17 @@ public class ListenForClap implements Behavior {
 	}
 	
 	public void listen() {
-		//TEST: listen for 2 seconds and display sound readings
-		LCD.clear();
-		for(int i = 0;i < 100; i++) {
-			LCD.setPixel(1,i,60-(sound.readValue()/2));
-			Thread.sleep(20);
-			if(suppressed)
-				return; //exit is method is suppressed
+		try {
+			//TEST: listen for 2 seconds and display sound readings
+			LCD.clear();
+			for(int i = 0;i < 100; i++) {
+				LCD.setPixel(1,i,60-(sound.readValue()/2));
+				Thread.sleep(20);
+				if(suppressed)
+					return; //exit is method is suppressed
+			}
+		} catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 }

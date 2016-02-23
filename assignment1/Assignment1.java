@@ -27,7 +27,7 @@ public class Assignment1 {
 	  arby = new Arbitrator(behaviors);
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
 	  Assignment1 robot = new Assignment1();
 	  robot.setup();
 	  robot.start();
