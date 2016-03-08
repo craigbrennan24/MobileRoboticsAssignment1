@@ -13,14 +13,17 @@ import lejos.robotics.subsumption.*;
 public class ListenForClap implements Behavior {
 	
 	private SoundSensor sound;
-	private boolean suppressed = false;
+	private boolean suppressed;
+	private boolean heardClap;
 	
 	public ListenForClap(SensorPort port){
 		sound = new SoundSensor(port);
+		heardClap = false;
+		suppressed = false;
 	}
 	
 	public boolean takeControl() {
-		return Button.RIGHT.isPressed();
+		return !heardClap;
 	}
 	
 	public void suppress() {
@@ -34,12 +37,19 @@ public class ListenForClap implements Behavior {
 	}
 	
 	public void listen() {
-		try {
-			//Sound test, displays sound reading whenever Right key is pressed
-			LCD.clear();
-			LCD.drawString(String.valueOf(sound.readValue()),0,0);
-		} catch (Exception e){
-			e.printStackTrace();
+		//Sound test, displays sound reading whenever Right key is pressed
+		while(!heardClap) {
+			try{
+				if(sound.readValue() >= 90){
+					heardClap = true;
+					LCD.clear();
+					LCD.drawString("Claps",0,0);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(suppressed)
+				return; //exit if suppressed
 		}
 	}
 }

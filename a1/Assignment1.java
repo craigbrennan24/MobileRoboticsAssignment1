@@ -25,7 +25,7 @@ public class Assignment1 {
 	  //Behavior b1 = new ListenForClap(SensorPort.S1);
 	  Behavior b1 = new TestBehavior();
 	  Behavior b2 = new ListenForClap(SensorPort.S1);
-	  behaviors = new Behavior[]{ b1, b2 };
+	  behaviors = new Behavior[]{ b2 };
 	  arby = new Arbitrator(behaviors);
   }
 

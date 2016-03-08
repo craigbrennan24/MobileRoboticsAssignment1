@@ -20,7 +20,7 @@ public class TestBehavior implements Behavior {
 	}
 	
 	public boolean takeControl() {
-		return Button.LEFT.isPressed();
+		return true;
 	}
 	
 	public void suppress() {
