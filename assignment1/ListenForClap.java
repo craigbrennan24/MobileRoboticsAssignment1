@@ -31,7 +31,7 @@ public class ListenForClap implements Behavior {
 				LCD.setPixel(1,i,60-(sound.readValue()/2));
 				Thread.sleep(20);
 				if(suppressed)
-					return; //exit is method is suppressed
+					return; //exit if method is suppressed
 			}
 		} catch (Exception e){
 			e.printStackTrace();
