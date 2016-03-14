@@ -23,9 +23,14 @@ public class Assignment1 {
   public void setup() {
 	  //Setup behaviors into behavior array
 	  //Behavior b1 = new ListenForClap(SensorPort.S1);
-	  Behavior b1 = new TestBehavior();
+	  Behavior b1 = new StartBehavior();
 	  Behavior b2 = new ListenForClap(SensorPort.S1);
-	  behaviors = new Behavior[]{ b2 };
+	  Behavior b3 = new MoveUntilLight(/*Add Sensorport*/);
+	  Behavior b4 = new MoveUntilSonarDetect(/*Add Sensorport*/);
+	  Behavior b5 = new MoveUntilTouch(/*Add Sensorport*/);
+	  behaviors = new Behavior[]{ b6, b5, b4, b3, b2, b1 };//Entered into array in reverse because Arbitrator
+														   //assigns priority as the size of the array index
+														   //ie, higher index = higher priority
 	  arby = new Arbitrator(behaviors);
   }
 
