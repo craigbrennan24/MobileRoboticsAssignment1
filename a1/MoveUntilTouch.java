@@ -8,16 +8,18 @@ import lejos.robotics.subsumption.*;
  * Brandon Murnane C13377256
  *
  *
- * Waits for clap sound, then prints "Claps" on the screen.
+ * Moves forward until bump sensor detects a collision, then stops and prints "Stop"
  */
 public class MoveUntilTouch implements Behavior {
 	
-	DifferentialPilot pilot;
+	private DifferentialPilot pilot;
+	private String text;
 	private TouchSensor touch;
 	private boolean touchDetected;
 	private boolean suppressed = false;
 	
 	public MoveUntilTouch(SensorPort port){
+		text = "Stop";
 		pilot = new DifferentialPilot();//TODO: set to correct motors
 		//DifferentialPilot(float wheelDiameter, float trackWidth, Motor leftMotor, Motor rightMotor)
 		//ie: = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.C);
@@ -45,8 +47,9 @@ public class MoveUntilTouch implements Behavior {
 			if(suppressed)
 				return;
 		}
+		touchDetected = true;
 		pilot.stop();
-		LCD.drawString("Stop",0,0);
+		LCD.drawString(text,0,0);
 		Button.waitForAnyPress();
 		return;
 	}

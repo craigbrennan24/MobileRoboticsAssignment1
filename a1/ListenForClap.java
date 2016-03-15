@@ -37,8 +37,8 @@ public class ListenForClap implements Behavior {
 	}
 	
 	public void listen() {
-		//Sound test, displays sound reading whenever Right key is pressed
 		while(!heardClap) {
+		//Loop until clap sound is heard, or break if behavior is suppressed.
 			try{
 				if(sound.readValue() >= 90){
 					heardClap = true;
