@@ -12,11 +12,15 @@ import lejos.robotics.subsumption.*;
  */
 public class MoveUntilTouch implements Behavior {
 	
+	DifferentialPilot pilot;
 	private TouchSensor touch;
 	private boolean touchDetected;
 	private boolean suppressed = false;
 	
 	public MoveUntilTouch(SensorPort port){
+		pilot = new DifferentialPilot();//TODO: set to correct motors
+		//DifferentialPilot(float wheelDiameter, float trackWidth, Motor leftMotor, Motor rightMotor)
+		//ie: = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.C);
 		touch = new TouchSensor(port);
 		touchDetected = false;
 	}
@@ -35,6 +39,15 @@ public class MoveUntilTouch implements Behavior {
 	
 	public void detectTouch() {
 		//TODO: move loop until bump into object
+		pilot.forward();
+		while(!touch.isPressed()) {
+			//Move until bump into object
+			if(suppressed)
+				return;
+		}
+		pilot.stop();
+		LCD.drawString("Stop",0,0);
+		Button.waitForAnyPress();
 		return;
 	}
 }

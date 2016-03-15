@@ -12,11 +12,15 @@ import lejos.robotics.subsumption.*;
  */
 public class MoveUntilSonarDetect implements Behavior {
 	
+	private DifferentialPilot pilot;
 	private UltrasonicSensor sonar;
 	private surfaceDetected;
 	private boolean suppressed = false;
 	
 	public MoveUntilSonarDetect(SensortPort port){
+		pilot = new DifferentialPilot();//TODO: set to correct motors
+		//DifferentialPilot(float wheelDiameter, float trackWidth, Motor leftMotor, Motor rightMotor)
+		//ie: = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.C);
 		sonar = new UltrasonicSensor(port);
 		surfaceDetected = false;
 	}
@@ -26,6 +30,7 @@ public class MoveUntilSonarDetect implements Behavior {
 	}
 	
 	public void suppress() {
+		pilot.stop();
 		suppressed = true;
 	}
 	
@@ -34,11 +39,13 @@ public class MoveUntilSonarDetect implements Behavior {
 	}
 	
 	public void detectSonar() {
-		while(sonar.getDistance() > 25 ){
-			//TODO: add move forward loop here
+		pilot.forward();
+		while(sonar.getDistance() > 25 ) {
+			//Loop until a surface less than 25cm away is detected
 			if(suppressed)
 				return;
 		}
+		pilot.stop();
 		surfaceDetected = true;
 	}
 	
@@ -47,7 +54,8 @@ public class MoveUntilSonarDetect implements Behavior {
 		//stop and turn 180
 		//move forward 20 then stop
 		//Turn 90 to the right
-		if(suppressed)
-			return;
+		pilot.rotate(180.0, false);
+		pilot.travel(20.0, false);
+		pilot.rotate(-90.0, false);
 	}
 }
