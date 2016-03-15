@@ -14,9 +14,13 @@ public class Assignment1 {
   
   public void setup() {
 	  //Setup behaviors into behavior array
-	  //Behavior b1 = new ListenForClap(SensorPort.S1);
+	  //*****************************************************************************************************
+	  //*     NOTE                                                                                          *
+	  //* I could not make it into the lab on 15/3/2016 so I do not know the correct ports for the hardware,*
+	  //* but the code should be correct. simply a matter of entering the correct ports here before running *
+	  //*****************************************************************************************************
 	  Behavior b1 = new Start();
-	  Behavior b2 = new ListenForClap(SensorPort.S1);/*Possibly wrong Sensorport*/
+	  Behavior b2 = new ListenForClap(/*Add Sensorport*/);
 	  Behavior b3 = new MoveUntilLight(/*Add Sensorport*/);
 	  Behavior b4 = new MoveUntilSonarDetect(/*Add Sensorport*/);
 	  Behavior b5 = new MoveUntilTouch(/*Add Sensorport*/);

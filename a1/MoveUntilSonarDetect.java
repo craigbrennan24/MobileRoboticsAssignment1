@@ -18,9 +18,7 @@ public class MoveUntilSonarDetect implements Behavior {
 	private boolean suppressed = false;
 	
 	public MoveUntilSonarDetect(SensortPort port){
-		pilot = new DifferentialPilot();//TODO: set to correct motors
-		//DifferentialPilot(float wheelDiameter, float trackWidth, Motor leftMotor, Motor rightMotor)
-		//ie: = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.C);
+		pilot = new DifferentialPilot(2.25f, 5.5f, Motor.B, Motor.C);
 		sonar = new UltrasonicSensor(port);
 		surfaceDetected = false;
 	}
@@ -50,10 +48,9 @@ public class MoveUntilSonarDetect implements Behavior {
 	}
 	
 	public void moveScript() {
-		//TODO: add move script here
-		//stop and turn 180
+		//stop and turn 180 degrees
 		//move forward 20 then stop
-		//Turn 90 to the right
+		//Turn 90 degrees to the right
 		pilot.rotate(180.0, false);
 		pilot.travel(20.0, false);
 		pilot.rotate(-90.0, false);

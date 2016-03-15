@@ -18,9 +18,7 @@ public class MoveUntilLight implements Behavior {
 	private boolean suppressed = false;
 	
 	public MoveUntilLight(SensorPort port){
-		pilot = new DifferentialPilot();//TODO: set to correct motors
-		//DifferentialPilot(float wheelDiameter, float trackWidth, Motor leftMotor, Motor rightMotor)
-		//ie: = new DifferentialPilot(2.25f, 5.5f, Motor.A, Motor.C);
+		pilot = new DifferentialPilot(2.25f, 5.5f, Motor.B, Motor.C);
 		light = new LightSensor(port);
 		foundLightSurface = false;
 	}
@@ -39,9 +37,6 @@ public class MoveUntilLight implements Behavior {
 	}
 	
 	public void detectLight() {
-		//*************************************
-		//TODO IN LAB: CALIBRATE LIGHT SETTINGS
-		//*************************************
 		pilot.forward();
 		while(light.getLightValue() < 50 ) {
 			//Loop until found light
@@ -54,8 +49,7 @@ public class MoveUntilLight implements Behavior {
 	}
 	
 	public void moveScript() {
-		//TODO add move scripts
-		//turn 90 to the left
+		//turn 90 degrees to the left
 		pilot.rotate(90.0, false);//Do not immediately return, wait until movement is comlete
 	}
 }
